@@ -56,10 +56,10 @@
                     </div>
                     <div class="form-group">
                         <label for="heslo">Heslo</label>
-                        <input type="text" class="form-control" id="heslo" name="heslo" placeholder="Vaše přihlašovací heslo" th:field="${prihlaseniDTO.heslo}">
+                        <input type="password" class="form-control" id="heslo" name="heslo" placeholder="Vaše přihlašovací heslo" th:field="${prihlaseniDTO.heslo}">
                         <!-- <input type="password" class="form-control" id="prihlaseni-heslo" placeholder="Vaše přihlašovací heslo"> -->
                     </div>
-                    <button type="submit" class="btn btn-success">Přihlásit</button>
+                    <input type="submit" value="Přihlásit" class="btn btn-success"/>
                 </form>                
             </div>
         </div>

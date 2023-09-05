@@ -1,6 +1,6 @@
 package cz.itnetwork.evidencepojistenychwebapp.models;
 
-public class NovyPojistenecDTO {
+public class PojistenecDTO {
     private String jmeno;
     private String prijmeni;
     private String email;
@@ -8,6 +8,22 @@ public class NovyPojistenecDTO {
     private String uliceCislo;
     private String mesto;
     private String psc;
+    
+    private String celeJmeno;
+    private String adresa;
+
+    public PojistenecDTO(String jmeno, String prijmeni, String email, String telefon, String uliceCislo, String mesto, String psc) {
+        this.jmeno = jmeno;
+        this.prijmeni = prijmeni;
+        this.email = email;
+        this.telefon = telefon;
+        this.uliceCislo = uliceCislo;
+        this.mesto = mesto;
+        this.psc = psc;
+
+        this.celeJmeno = jmeno + " " + prijmeni;
+        this.adresa = uliceCislo + ", " + mesto + ", " + psc;
+    }
 
     public String getJmeno() {
         return jmeno;
@@ -63,5 +79,21 @@ public class NovyPojistenecDTO {
 
     public void setPsc(String psc) {
         this.psc = psc;
+    }
+
+    public String getCeleJmeno() {
+        return celeJmeno;
+    }
+
+    public void setCeleJmeno(String celeJmeno) {
+        this.celeJmeno = celeJmeno;
+    }
+
+    public String getAdresa() {
+        return adresa;
+    }
+
+    public void setAdresa(String adresa) {
+        this.adresa = adresa;
     }
 }

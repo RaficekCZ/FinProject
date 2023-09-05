@@ -7,6 +7,9 @@
         "th:field": {
             "context": "input"
         },
+        "th:each": {
+            "context": "tr"
+        },
         "th:value": {
             "context": "input"
         }
