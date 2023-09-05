@@ -1,0 +1,14 @@
+{
+    "elements": {},
+    "attributes": {
+        "th:text": {
+            "context": "input"
+        },
+        "th:field": {
+            "context": "input"
+        },
+        "th:value": {
+            "context": "input"
+        }
+    }
+}

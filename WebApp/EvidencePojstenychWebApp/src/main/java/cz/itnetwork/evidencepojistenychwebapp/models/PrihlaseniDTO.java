@@ -1,22 +1,22 @@
 package cz.itnetwork.evidencepojistenychwebapp.models;
 
 public class PrihlaseniDTO {
-    private float prihlaseniJmeno;
-    private float prihlaseniHeslo;
+    private String jmeno;
+    private String heslo;
 
-    public float getPrihlaseniJmeno() {
-        return prihlaseniJmeno;
+    public String getJmeno() {
+        return jmeno;
     }
 
-    public void setPrihlaseniJmeno(float prihlaseniJmeno) {
-        this.prihlaseniJmeno = prihlaseniJmeno;
+    public void setJmeno(String jmeno) {
+        this.jmeno = jmeno;
     }
 
-    public float getPrihlaseniHeslo() {
-        return prihlaseniHeslo;
+    public String getHeslo() {
+        return heslo;
     }
 
-    public void setPrihlaseniHeslo(float prihlaseniHeslo) {
-        this.prihlaseniHeslo = prihlaseniHeslo;
+    public void setHeslo(String heslo) {
+        this.heslo = heslo;
     }
 }

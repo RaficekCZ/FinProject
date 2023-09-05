@@ -49,23 +49,19 @@
             <div class="col-md-4">
                 <form action="/prihlaseni" method="post">
                     <div class="form-group">
-                        <label for="prihlaseniJmeno">Přihlašovací jméno</label>
-                        <input type="number" class="form-control" id="prihlaseniJmeno" name="prihlaseniJmeno" placeholder="Vaše přihlašovací jméno" th:field="${prihlaseniDTO.prihlaseniJmeno}">
+                        <label for="jmeno">Přihlašovací jméno</label>
+                        <input type="text" class="form-control" id="jmeno" name="jmeno" placeholder="Vaše přihlašovací jméno" th:field="${prihlaseniDTO.jmeno}">
                         <!-- <input type="email" class="form-control" id="prihlaseni-jmeno" placeholder="Vaše přihlašovací jméno"> -->
                         <!-- <small class="form-text text-muted">Kromě emailu můžete zadat i své telefonní číslo.</small> -->
                     </div>
                     <div class="form-group">
-                        <label for="prihlaseniHeslo">Heslo</label>
-                        <input type="number" class="form-control" id="prihlaseniHeslo" name="prihlaseniHeslo" placeholder="Vaše přihlašovací heslo" th:field="${prihlaseniDTO.prihlaseniHeslo}">
+                        <label for="heslo">Heslo</label>
+                        <input type="text" class="form-control" id="heslo" name="heslo" placeholder="Vaše přihlašovací heslo" th:field="${prihlaseniDTO.heslo}">
                         <!-- <input type="password" class="form-control" id="prihlaseni-heslo" placeholder="Vaše přihlašovací heslo"> -->
                     </div>
                     <button type="submit" class="btn btn-success">Přihlásit</button>
-                    
-                    <input type="submit" value="Submit"/>
-
                 </form>                
             </div>
-            <div class="col-md-4"></div>
         </div>
     </main>
 </body>
