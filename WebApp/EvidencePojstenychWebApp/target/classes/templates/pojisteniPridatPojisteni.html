@@ -18,11 +18,11 @@
             </button>
             <div class="collapse navbar-collapse" id="obsah-navigacni-listy">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Pojištěnci</a>
-                    </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="\pojisteni">Pojištění</a>
+                        <a class="nav-link" href="\pojistenci">Pojištěnci</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Pojištění</a>
                     </li>                
                     <li class="nav-item">
                         <a class="nav-link" href="\about">O aplikaci</a>
@@ -42,34 +42,43 @@
     <main class="container-fluid">
         <div class="row mt-md-5">
             <div class="col-md-1"></div>
-            <div class="col-md-2"><h2 class="text-dark">Pojištěnci</h2></div>
-            <div class="col-md-9"></div>
-        </div>
-        <div class="row">
-            <div class="col-md-5"></div>
-            <div class="col-md-2 text-center"><a class="btn btn-success" href="\pojistenci\novy">Přidat pojištěnce</a></div>
-            <div class="col-md-5"></div>
+            <div class="col-md-11"><h2 class="text-dark">Přidat pojištění</h2></div>
         </div>
         <div class="row mt-md-5">
-            <div class="col-md-1"></div>
-            <div class="col-md-10">                
-                <table class="table table-light table-hover table-bordered">
-                    <thead class="thead-dark">
-                        <th>Jméno a příjmení</th>
-                        <th>Adresa</th>
-                        <th>Možnosti</th>
-                    </thead>
-                    <tbody>
-                        <tr th:each="pojistenec : ${seznamPojistencu}">
-                            <td class="align-middle"><a th:href="@{/pojistenci/detail/{id}(id=${pojistenec.pojistenecId})}" th:text="${pojistenec.celeJmeno}"></a></td>
-                            <td class="align-middle" th:text="${pojistenec.adresa}"></td>
-                            <td class="align-middle">
-                                <button type="button" class="btn btn-warning">Editovat</button>
-                                <button type="button" class="btn btn-danger">Odstranit</button>
-                            </td>                        
-                        </tr>
-                    </tbody>
-                </table>                
+            <div class="col-md-12">
+                <form action="/pojisteni/novy" method="post">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="nazev">Název pojištění</label>
+                                <input type="text" class="form-control" id="nazev" name="nazev" placeholder="Pojištění proti požáru" th:field="${pojisteniDTO.nazev}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="min">Minimální výše pojištění [Kč]</label>
+                                <input type="text" class="form-control" id="min" name="min" placeholder="100 000" th:field="${pojisteniDTO.min}">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="max">Maximální výše pojištění [Kč]</label>
+                                <input type="text" class="form-control" id="max" name="max" placeholder="5 000 000" th:field="${pojisteniDTO.max}">
+                            </div>                            
+                        </div>                        
+                    </div>
+                    <div class="row mt-md-3">
+                        <div class="col-md-5"></div>
+                        <div class="col-md-2">
+                            <input type="submit" value="Přidat pojištění" class="btn btn-success"/>
+                        </div>
+                    </div>                          
+                </form>
             </div>
         </div>
     </main>

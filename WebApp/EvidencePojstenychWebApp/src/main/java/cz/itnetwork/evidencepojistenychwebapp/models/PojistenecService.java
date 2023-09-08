@@ -11,15 +11,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PojistenecService {
-
-    public void zalozitNovehoPojistence(PojistenecDTO pojistenec){
-        String jmeno = pojistenec.getJmeno();
-        String prijmeni = pojistenec.getPrijmeni();
-        String email = pojistenec.getEmail();
-        String telefon = pojistenec.getTelefon();
-        String uliceCislo = pojistenec.getUliceCislo();
-        String mesto = pojistenec.getMesto();
-        String psc = pojistenec.getPsc();
+    
+    public void zalozitNovehoPojistence(PojistenecDTO pojistenecDTO){
+        String jmeno = pojistenecDTO.getJmeno();
+        String prijmeni = pojistenecDTO.getPrijmeni();
+        String email = pojistenecDTO.getEmail();
+        String telefon = pojistenecDTO.getTelefon();
+        String uliceCislo = pojistenecDTO.getUliceCislo();
+        String mesto = pojistenecDTO.getMesto();
+        String psc = pojistenecDTO.getPsc();
         try {
             Connection spojeni = DriverManager.getConnection("jdbc:mysql://localhost/pojistovna?user=root&password=");
             PreparedStatement dotaz = spojeni.prepareStatement("INSERT INTO pojistenci (jmeno, prijmeni, email, telefon, ulice_cislo, mesto, psc) VALUES (?, ?, ?, ?, ?, ?, ?)");
@@ -37,6 +37,10 @@ public class PojistenecService {
         }
     }
     
+    /* 
+        Toto možná není nejlepší řešení, protože při každém kliku na záložku "Pojištěnci", se generuje nová instance každého pojištěnce.
+        Zatím jsem ale nepřišel na způsob, jak toto provést lépe.
+    */
     public List<PojistenecDTO> ziskaniVsechPojistencu() {
         List<PojistenecDTO> pojistenci = new ArrayList<>();
         try {
@@ -45,8 +49,8 @@ public class PojistenecService {
             ResultSet vysledky = dotaz.executeQuery();
             
             while (vysledky.next()) {
-                pojistenci.add(new PojistenecDTO(vysledky.getString(2), vysledky.getString(3), vysledky.getString(4), vysledky.getString(5),
-                                                 vysledky.getString(6), vysledky.getString(7), vysledky.getString(8)));
+                pojistenci.add(new PojistenecDTO(vysledky.getInt(1), vysledky.getString(2), vysledky.getString(3), vysledky.getString(4),
+                                                 vysledky.getString(5), vysledky.getString(6), vysledky.getString(7), vysledky.getString(8)));
             }
         }
         catch (SQLException ex) {
@@ -54,4 +58,21 @@ public class PojistenecService {
         }      
         return pojistenci;
     }
+    
+    public PojistenecDTO ziskatDetailPojistence(String id) {
+        PojistenecDTO pojistenecDTO = null;
+        try {
+            Connection spojeni = DriverManager.getConnection("jdbc:mysql://localhost/pojistovna?user=root&password=");
+            PreparedStatement dotaz = spojeni.prepareStatement("SELECT * FROM pojistenci WHERE pojistenci_id = ?");
+            dotaz.setString(1, id);
+            ResultSet vysledky = dotaz.executeQuery();
+            vysledky.next();
+            pojistenecDTO = new PojistenecDTO(vysledky.getInt(1), vysledky.getString(2), vysledky.getString(3), vysledky.getString(4),
+                                              vysledky.getString(5), vysledky.getString(6), vysledky.getString(7), vysledky.getString(8));
+        }
+        catch (SQLException ex) {
+            System.out.println("Chyba při komunikaci s databází");
+        }
+        return pojistenecDTO;
+    }    
 }

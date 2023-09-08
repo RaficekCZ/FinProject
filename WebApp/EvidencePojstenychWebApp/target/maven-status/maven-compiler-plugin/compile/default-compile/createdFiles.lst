@@ -1,4 +1,6 @@
 cz\itnetwork\evidencepojistenychwebapp\models\PrihlaseniService.class
+cz\itnetwork\evidencepojistenychwebapp\models\PojisteniDTO.class
+cz\itnetwork\evidencepojistenychwebapp\models\PojisteniService.class
 cz\itnetwork\evidencepojistenychwebapp\models\PrihlaseniDTO.class
 cz\itnetwork\evidencepojistenychwebapp\controllers\AboutController.class
 cz\itnetwork\evidencepojistenychwebapp\controllers\PojistenciController.class

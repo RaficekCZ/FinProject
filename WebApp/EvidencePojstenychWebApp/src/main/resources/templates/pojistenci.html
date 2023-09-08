@@ -61,7 +61,7 @@
                     </thead>
                     <tbody>
                         <tr th:each="pojistenec : ${seznamPojistencu}">
-                            <td class="align-middle" th:text="${pojistenec.celeJmeno}"></td>
+                            <td class="align-middle"><a th:href="@{/pojistenci/detail/{id}(id=${pojistenec.pojistenecId})}" th:text="${pojistenec.celeJmeno}"></a></td>
                             <td class="align-middle" th:text="${pojistenec.adresa}"></td>
                             <td class="align-middle">
                                 <button type="button" class="btn btn-warning">Editovat</button>

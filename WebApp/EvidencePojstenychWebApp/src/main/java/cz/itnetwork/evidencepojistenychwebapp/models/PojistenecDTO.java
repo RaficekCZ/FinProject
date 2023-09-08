@@ -1,6 +1,8 @@
 package cz.itnetwork.evidencepojistenychwebapp.models;
 
 public class PojistenecDTO {
+    
+    private Integer pojistenecId;
     private String jmeno;
     private String prijmeni;
     private String email;
@@ -12,7 +14,8 @@ public class PojistenecDTO {
     private String celeJmeno;
     private String adresa;
 
-    public PojistenecDTO(String jmeno, String prijmeni, String email, String telefon, String uliceCislo, String mesto, String psc) {
+    public PojistenecDTO(Integer pojistenciId, String jmeno, String prijmeni, String email, String telefon, String uliceCislo, String mesto, String psc) {
+        this.pojistenecId = pojistenciId;
         this.jmeno = jmeno;
         this.prijmeni = prijmeni;
         this.email = email;
@@ -95,5 +98,13 @@ public class PojistenecDTO {
 
     public void setAdresa(String adresa) {
         this.adresa = adresa;
+    }
+    
+    public int getPojistenecId() {
+        return pojistenecId;
+    }
+    
+    public void setPojistenecId(int pojistenecId) {
+        this.pojistenecId = pojistenecId;
     }
 }

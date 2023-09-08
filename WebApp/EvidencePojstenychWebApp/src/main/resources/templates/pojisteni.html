@@ -42,13 +42,11 @@
     <main class="container-fluid">
         <div class="row mt-md-5">
             <div class="col-md-1"></div>
-            <div class="col-md-2"><h2 class="text-dark">Pojištění</h2></div>
-            <div class="col-md-9"></div>
+            <div class="col-md-11"><h2 class="text-dark">Pojištění</h2></div>
         </div>
         <div class="row">
             <div class="col-md-5"></div>
-            <div class="col-md-2 text-center"><button type="button" class="btn btn-success">Přidat pojištění</button></div>
-            <div class="col-md-5"></div>
+            <div class="col-md-2 text-center"><a class="btn btn-success" href="\pojisteni\novy">Přidat pojištění</a></div>
         </div>
         <div class="row mt-md-5">
             <div class="col-md-1"></div>
@@ -56,9 +54,21 @@
                 <table class="table table-light table-hover table-bordered">
                     <thead class="thead-dark">
                         <th>Název pojištění</th>
-                        <th>Popis</th>
+                        <th>Minimální částka [Kč]</th>
+                        <th>Maximální částka [Kč]</th>
                         <th>Možnosti</th>
                     </thead>
+                    <tbody>
+                        <tr th:each="pojisteni : ${seznamPojisteni}">
+                            <td class="align-middle" th:text="${pojisteni.nazev}"></td>
+                            <td class="align-middle" th:text="${pojisteni.min}"></td>
+                            <td class="align-middle" th:text="${pojisteni.max}"></td>
+                            <td class="align-middle">
+                                <button type="button" class="btn btn-danger">Odstranit</button>
+                            </td>                        
+                        </tr>  
+                    </tbody>
+                    <!--
                     <tr>
                         <td class="align-middle"><a href="#">Pojištění proti vyhoření</a></td>
                         <td class="align-middle">Od 0 Kč do 10 000 000 Kč</td>
@@ -98,7 +108,8 @@
                             <button type="button" class="btn btn-warning">Editovat</button>
                             <button type="button" class="btn btn-danger">Odstranit</button>
                         </td>                       
-                    </tr>                     
+                    </tr>
+                    -->
                 </table>
             </div>
             <div class="col-md-1"></div>
