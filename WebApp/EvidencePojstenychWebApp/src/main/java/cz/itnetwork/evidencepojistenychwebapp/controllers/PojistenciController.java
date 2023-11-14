@@ -10,35 +10,56 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/pojistovna/pojistenci")
 public class PojistenciController {
     
 @Autowired
 private PojistenecService pojistenecService;
 
-    @GetMapping("/pojistenci")
+    @GetMapping()
     public String vypsaniStrankyPojistenci(Model model) {
-        List<PojistenecDTO> pojistenci = pojistenecService.ziskaniVsechPojistencu();
-        model.addAttribute("seznamPojistencu", pojistenci);
+        List<PojistenecDTO> pojistenciDTO = pojistenecService.ziskatVsechnyPojistence();
+        model.addAttribute("seznamPojistencuDTO", pojistenciDTO);
         return "pojistenci";
     }
     
-    @GetMapping("/pojistenci/novy")
+    @GetMapping("novy")
     public String vypsaniFormularNovyPojistenec(@ModelAttribute PojistenecDTO pojistenecDTO) {
         return "pojistenciPridatPojistence";
     }
 
-    @PostMapping("/pojistenci/novy")
+    @PostMapping("novy")
     public String zalozitNovehoPojistence(@ModelAttribute PojistenecDTO pojistenecDTO) {
-        pojistenecService.zalozitNovehoPojistence(pojistenecDTO);
+        pojistenecService.zalozitPojistence(pojistenecDTO);
         return "pojistenciResult";
     }
     
-    @GetMapping("/pojistenci/detail/{id}")
+    @GetMapping("detail/{id}")
     public String vypsaniStrankyDetailuPojistence(@PathVariable("id") String id, Model model) {
         PojistenecDTO pojistenecDTO = pojistenecService.ziskatDetailPojistence(id);
         model.addAttribute("pojistenecDTO", pojistenecDTO);
         return "pojistenciDetail";
+    }
+    
+    @GetMapping("editace/{id}")
+    public String vypsaniFormularEditacePojistence(@PathVariable("id") String id, Model model) {
+        PojistenecDTO pojistenecDTO = pojistenecService.ziskatDetailPojistence(id);
+        model.addAttribute("pojistenecDTO", pojistenecDTO);
+        return "pojistenciEditovatPojistence";
+    }
+
+    @PostMapping("editace")
+    public String editovatPojistence(@ModelAttribute PojistenecDTO pojistenecDTO) {
+        pojistenecService.editovatPojistence(pojistenecDTO);
+        return "pojistenciResult";
+    }
+    
+    @PostMapping("smazani")
+    public String smazaniPojistence(@ModelAttribute PojistenecDTO pojistenecDTO) {
+        pojistenecService.smazatPojistence(pojistenecDTO);
+        return "pojistenciResult";
     }
 }

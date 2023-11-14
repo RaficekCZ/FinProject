@@ -4,11 +4,17 @@
         "th:text": {
             "context": "input"
         },
+        "th:src": {
+            "context": "img"
+        },
         "th:field": {
             "context": "input"
         },
         "th:each": {
             "context": "tr"
+        },
+        "th:href": {
+            "context": "a"
         },
         "th:value": {
             "context": "input"

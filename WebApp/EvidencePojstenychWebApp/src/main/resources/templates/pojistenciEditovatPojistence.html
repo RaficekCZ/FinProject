@@ -42,23 +42,23 @@
     <main class="container-fluid">
         <div class="row mt-md-5">
             <div class="col-md-1"></div>
-            <div class="col-md-11"><h2 class="text-dark">Přidat pojištěnce</h2></div>
+            <div class="col-md-11"><h2 class="text-dark">Editovat pojištěnce</h2></div>
         </div>
         <div class="row mt-md-5">
             <div class="col-md-12">
-                <form action="/pojistovna/pojistenci/novy" method="post">
+                <form action="/pojistovna/pojistenci/editace" method="post">
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="jmeno">Jméno</label>
-                                <input type="text" class="form-control" id="jmeno" name="jmeno" placeholder="Jan" th:field="${pojistenecDTO.jmeno}">
+                                <input type="text" class="form-control" id="jmeno" name="jmeno" th:field="${pojistenecDTO.jmeno}">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="prijmeni">Příjmení</label>
-                                <input type="text" class="form-control" id="prijmeni" name="prijmeni" placeholder="Novák" th:field="${pojistenecDTO.prijmeni}">
+                                <input type="text" class="form-control" id="prijmeni" name="prijmeni" th:field="${pojistenecDTO.prijmeni}">
                             </div>                            
                         </div>
                     </div>
@@ -67,13 +67,13 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="email">E-mail</label>
-                                <input type="text" class="form-control" id="email" name="email" placeholder="jannovak88@seznam.cz" th:field="${pojistenecDTO.email}">
+                                <input type="text" class="form-control" id="email" name="email" th:field="${pojistenecDTO.email}">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="telefon">Telefon</label>
-                                <input type="text" class="form-control" id="telefon" name="telefon" placeholder="731 584 972" th:field="${pojistenecDTO.telefon}">
+                                <input type="text" class="form-control" id="telefon" name="telefon" th:field="${pojistenecDTO.telefon}">
                             </div>                            
                         </div>
                     </div>
@@ -82,30 +82,34 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="uliceCislo">Ulice a číslo popisné</label>
-                                <input type="text" class="form-control" id="uliceCislo" name="uliceCislo" placeholder="Ve Svahu 3" th:field="${pojistenecDTO.uliceCislo}">
+                                <input type="text" class="form-control" id="uliceCislo" name="uliceCislo" th:field="${pojistenecDTO.uliceCislo}">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="mesto">Město</label>
-                                <input type="text" class="form-control" id="mesto" name="mesto" placeholder="Praha 10" th:field="${pojistenecDTO.mesto}">
+                                <input type="text" class="form-control" id="mesto" name="mesto" th:field="${pojistenecDTO.mesto}">
                             </div>                            
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-1"></div>
-                        <div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="pojistenci_id" name="pojistenci_id" th:field="${pojistenecDTO.pojistenecId}"/>
+                            </div>                            
+                        </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="psc">PSČ</label>
-                                <input type="text" class="form-control" id="psc" name="psc" placeholder="100 00" th:field="${pojistenecDTO.psc}">
+                                <input type="text" class="form-control" id="psc" name="psc" th:field="${pojistenecDTO.psc}">
                             </div>
                         </div>
                     </div>
                     <div class="row mt-md-3">
                         <div class="col-md-5"></div>
                         <div class="col-md-2">
-                            <input type="submit" value="Přidat pojištěnce" class="btn btn-success"/>
+                            <input type="submit" value="Přepsat pojištěnce" class="btn btn-success"/>
                         </div>
                     </div>                          
                 </form>

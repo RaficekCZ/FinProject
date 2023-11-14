@@ -1,3 +1,4 @@
+cz\itnetwork\evidencepojistenychwebapp\controllers\HomePojistovnaController.class
 cz\itnetwork\evidencepojistenychwebapp\models\PrihlaseniService.class
 cz\itnetwork\evidencepojistenychwebapp\models\PojisteniDTO.class
 cz\itnetwork\evidencepojistenychwebapp\models\PojisteniService.class
@@ -7,5 +8,6 @@ cz\itnetwork\evidencepojistenychwebapp\controllers\PojistenciController.class
 cz\itnetwork\evidencepojistenychwebapp\models\PojistenecService.class
 cz\itnetwork\evidencepojistenychwebapp\EvidencePojistenychWebApp.class
 cz\itnetwork\evidencepojistenychwebapp\controllers\PrihlaseniController.class
+cz\itnetwork\evidencepojistenychwebapp\models\PojistenecEntity.class
 cz\itnetwork\evidencepojistenychwebapp\controllers\PojisteniController.class
 cz\itnetwork\evidencepojistenychwebapp\models\PojistenecDTO.class

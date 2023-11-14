@@ -1,10 +1,7 @@
 package cz.itnetwork.evidencepojistenychwebapp.models;
 
-import java.util.ArrayList;
-import java.util.List;
+public class PojistenecEntity {
 
-public class PojistenecDTO {
-    
     private int pojistenecId;
     private String jmeno;
     private String prijmeni;
@@ -13,18 +10,15 @@ public class PojistenecDTO {
     private String uliceCislo;
     private String mesto;
     private String psc;
-    
-    private String celeJmeno;
-    private String adresa;
 
     public int getPojistenecId() {
         return pojistenecId;
     }
-    
+
     public void setPojistenecId(int pojistenecId) {
         this.pojistenecId = pojistenecId;
-    }    
-    
+    }
+
     public String getJmeno() {
         return jmeno;
     }
@@ -79,21 +73,5 @@ public class PojistenecDTO {
 
     public void setPsc(String psc) {
         this.psc = psc;
-    }
-
-    public String getCeleJmeno() {
-        return celeJmeno;
-    }
-
-    public void setCeleJmeno(String celeJmeno) {
-        this.celeJmeno = celeJmeno;
-    }
-
-    public String getAdresa() {
-        return adresa;
-    }
-
-    public void setAdresa(String adresa) {
-        this.adresa = adresa;
     }
 }

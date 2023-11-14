@@ -12,24 +12,126 @@ import org.springframework.stereotype.Service;
 @Service
 public class PojistenecService {
     
-    public void zalozitNovehoPojistence(PojistenecDTO pojistenecDTO){
-        String jmeno = pojistenecDTO.getJmeno();
-        String prijmeni = pojistenecDTO.getPrijmeni();
-        String email = pojistenecDTO.getEmail();
-        String telefon = pojistenecDTO.getTelefon();
-        String uliceCislo = pojistenecDTO.getUliceCislo();
-        String mesto = pojistenecDTO.getMesto();
-        String psc = pojistenecDTO.getPsc();
+    public void zalozitPojistence(PojistenecDTO pojistenecDTO){
+        PojistenecEntity pojistenec = new PojistenecEntity();
+        pojistenec.setJmeno(pojistenecDTO.getJmeno());
+        pojistenec.setPrijmeni(pojistenecDTO.getPrijmeni());
+        pojistenec.setEmail(pojistenecDTO.getEmail());
+        pojistenec.setTelefon(pojistenecDTO.getTelefon());
+        pojistenec.setUliceCislo(pojistenecDTO.getUliceCislo());
+        pojistenec.setMesto(pojistenecDTO.getMesto());
+        pojistenec.setPsc(pojistenecDTO.getPsc());
         try {
             Connection spojeni = DriverManager.getConnection("jdbc:mysql://localhost/pojistovna?user=root&password=");
             PreparedStatement dotaz = spojeni.prepareStatement("INSERT INTO pojistenci (jmeno, prijmeni, email, telefon, ulice_cislo, mesto, psc) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            dotaz.setString(1, jmeno);
-            dotaz.setString(2, prijmeni);
-            dotaz.setString(3, email);
-            dotaz.setString(4, telefon);
-            dotaz.setString(5, uliceCislo);
-            dotaz.setString(6, mesto);
-            dotaz.setString(7, psc);
+            dotaz.setString(1, pojistenec.getJmeno());
+            dotaz.setString(2, pojistenec.getPrijmeni());
+            dotaz.setString(3, pojistenec.getEmail());
+            dotaz.setString(4, pojistenec.getTelefon());
+            dotaz.setString(5, pojistenec.getUliceCislo());
+            dotaz.setString(6, pojistenec.getMesto());
+            dotaz.setString(7, pojistenec.getPsc());
+            dotaz.executeUpdate();
+        }
+        catch (SQLException ex) {
+            System.out.println("Chyba při komunikaci s databází");
+        }
+    }
+
+    public List<PojistenecDTO> ziskatVsechnyPojistence() {
+        List<PojistenecEntity> seznamPojistencuEntity = new ArrayList<>();
+        List<PojistenecDTO> seznamPojistencuDTO = new ArrayList<>();
+        int counter = 0;
+        try {
+            Connection spojeni = DriverManager.getConnection("jdbc:mysql://localhost/pojistovna?user=root&password=");
+            PreparedStatement dotaz = spojeni.prepareStatement("SELECT * FROM pojistenci");
+            ResultSet vysledky = dotaz.executeQuery();
+            while (vysledky.next()) {
+                PojistenecEntity pojistenecEntity = new PojistenecEntity();
+                PojistenecDTO pojistenecDTO = new PojistenecDTO();
+                seznamPojistencuEntity.add(pojistenecEntity);
+                seznamPojistencuDTO.add(pojistenecDTO);
+                seznamPojistencuEntity.get(counter).setPojistenecId(vysledky.getInt(1));
+                seznamPojistencuDTO.get(counter).setPojistenecId(seznamPojistencuEntity.get(counter).getPojistenecId());
+                seznamPojistencuEntity.get(counter).setJmeno(vysledky.getString(2));
+                seznamPojistencuDTO.get(counter).setJmeno(seznamPojistencuEntity.get(counter).getJmeno());
+                seznamPojistencuEntity.get(counter).setPrijmeni(vysledky.getString(3));
+                seznamPojistencuDTO.get(counter).setPrijmeni(seznamPojistencuEntity.get(counter).getPrijmeni());
+                seznamPojistencuEntity.get(counter).setEmail(vysledky.getString(4));
+                seznamPojistencuDTO.get(counter).setEmail(seznamPojistencuEntity.get(counter).getEmail());
+                seznamPojistencuEntity.get(counter).setTelefon(vysledky.getString(5));
+                seznamPojistencuDTO.get(counter).setTelefon(seznamPojistencuEntity.get(counter).getTelefon());
+                seznamPojistencuEntity.get(counter).setUliceCislo(vysledky.getString(6));
+                seznamPojistencuDTO.get(counter).setUliceCislo(seznamPojistencuEntity.get(counter).getUliceCislo());
+                seznamPojistencuEntity.get(counter).setMesto(vysledky.getString(7));
+                seznamPojistencuDTO.get(counter).setMesto(seznamPojistencuEntity.get(counter).getMesto());
+                seznamPojistencuEntity.get(counter).setPsc(vysledky.getString(8));
+                seznamPojistencuDTO.get(counter).setPsc(seznamPojistencuEntity.get(counter).getPsc());
+                seznamPojistencuDTO.get(counter).setCeleJmeno(seznamPojistencuDTO.get(counter).getJmeno() + " " + seznamPojistencuDTO.get(counter).getPrijmeni());
+                seznamPojistencuDTO.get(counter).setAdresa(seznamPojistencuDTO.get(counter).getUliceCislo() + ", " + seznamPojistencuDTO.get(counter).getMesto() + ", " + seznamPojistencuDTO.get(counter).getPsc());
+                counter++;
+            }
+        }
+        catch (SQLException ex) {
+            System.out.println("Chyba při komunikaci s databází");
+        }
+        return seznamPojistencuDTO;
+    }
+    
+    public PojistenecDTO ziskatDetailPojistence(String id) {
+        PojistenecEntity pojistenecEntity = new PojistenecEntity();
+        PojistenecDTO pojistenecDTO = new PojistenecDTO();
+        try {
+            Connection spojeni = DriverManager.getConnection("jdbc:mysql://localhost/pojistovna?user=root&password=");
+            PreparedStatement dotaz = spojeni.prepareStatement("SELECT * FROM pojistenci WHERE pojistenci_id = ?");
+            dotaz.setString(1, id);
+            ResultSet vysledky = dotaz.executeQuery();
+            vysledky.next();
+            pojistenecEntity.setPojistenecId(vysledky.getInt(1));
+            pojistenecDTO.setPojistenecId(pojistenecEntity.getPojistenecId());
+            pojistenecEntity.setJmeno(vysledky.getString(2));
+            pojistenecDTO.setJmeno(pojistenecEntity.getJmeno());
+            pojistenecEntity.setPrijmeni(vysledky.getString(3));
+            pojistenecDTO.setPrijmeni(pojistenecEntity.getPrijmeni());
+            pojistenecEntity.setEmail(vysledky.getString(4));
+            pojistenecDTO.setEmail(pojistenecEntity.getEmail());
+            pojistenecEntity.setTelefon(vysledky.getString(5));
+            pojistenecDTO.setTelefon(pojistenecEntity.getTelefon());
+            pojistenecEntity.setUliceCislo(vysledky.getString(6));
+            pojistenecDTO.setUliceCislo(pojistenecEntity.getUliceCislo());
+            pojistenecEntity.setMesto(vysledky.getString(7));
+            pojistenecDTO.setMesto(pojistenecEntity.getMesto());
+            pojistenecEntity.setPsc(vysledky.getString(8));
+            pojistenecDTO.setPsc(pojistenecEntity.getPsc());
+        }
+        catch (SQLException ex) {
+            System.out.println("Chyba při komunikaci s databází");
+        }
+        return pojistenecDTO;
+    }
+
+    public void editovatPojistence(PojistenecDTO pojistenecDTO){
+        PojistenecEntity pojistenec = new PojistenecEntity();
+        pojistenec.setPojistenecId(pojistenecDTO.getPojistenecId());
+        pojistenec.setJmeno(pojistenecDTO.getJmeno());
+        pojistenec.setPrijmeni(pojistenecDTO.getPrijmeni());
+        pojistenec.setEmail(pojistenecDTO.getEmail());
+        pojistenec.setTelefon(pojistenecDTO.getTelefon());
+        pojistenec.setUliceCislo(pojistenecDTO.getUliceCislo());
+        pojistenec.setMesto(pojistenecDTO.getMesto());
+        pojistenec.setPsc(pojistenecDTO.getPsc());
+        try {
+            Connection spojeni = DriverManager.getConnection("jdbc:mysql://localhost/pojistovna?user=root&password=");
+            //PreparedStatement dotaz = spojeni.prepareStatement("UPDATE pojistenci SET jmeno = sdf, `prijmeni` = 'fdsf', `email` = 'fsdf' WHERE `pojistenci_id` = 1");
+            PreparedStatement dotaz = spojeni.prepareStatement("UPDATE pojistenci SET jmeno = ?, prijmeni = ?, email = ?, telefon = ?, ulice_cislo = ?, mesto = ?, psc = ? WHERE pojistenci_id = ?");
+            dotaz.setString(1, pojistenec.getJmeno());
+            dotaz.setString(2, pojistenec.getPrijmeni());
+            dotaz.setString(3, pojistenec.getEmail());
+            dotaz.setString(4, pojistenec.getTelefon());
+            dotaz.setString(5, pojistenec.getUliceCislo());
+            dotaz.setString(6, pojistenec.getMesto());
+            dotaz.setString(7, pojistenec.getPsc());
+            dotaz.setString(8, Integer.toString(pojistenec.getPojistenecId()));
             dotaz.executeUpdate();
         }
         catch (SQLException ex) {
@@ -37,42 +139,8 @@ public class PojistenecService {
         }
     }
     
-    /* 
-        Toto možná není nejlepší řešení, protože při každém kliku na záložku "Pojištěnci", se generuje nová instance každého pojištěnce.
-        Zatím jsem ale nepřišel na způsob, jak toto provést lépe.
-    */
-    public List<PojistenecDTO> ziskaniVsechPojistencu() {
-        List<PojistenecDTO> pojistenci = new ArrayList<>();
-        try {
-            Connection spojeni = DriverManager.getConnection("jdbc:mysql://localhost/pojistovna?user=root&password=");
-            PreparedStatement dotaz = spojeni.prepareStatement("SELECT * FROM pojistenci");
-            ResultSet vysledky = dotaz.executeQuery();
-            
-            while (vysledky.next()) {
-                pojistenci.add(new PojistenecDTO(vysledky.getInt(1), vysledky.getString(2), vysledky.getString(3), vysledky.getString(4),
-                                                 vysledky.getString(5), vysledky.getString(6), vysledky.getString(7), vysledky.getString(8)));
-            }
-        }
-        catch (SQLException ex) {
-            System.out.println("Chyba při komunikaci s databází");
-        }      
-        return pojistenci;
-    }
-    
-    public PojistenecDTO ziskatDetailPojistence(String id) {
-        PojistenecDTO pojistenecDTO = null;
-        try {
-            Connection spojeni = DriverManager.getConnection("jdbc:mysql://localhost/pojistovna?user=root&password=");
-            PreparedStatement dotaz = spojeni.prepareStatement("SELECT * FROM pojistenci WHERE pojistenci_id = ?");
-            dotaz.setString(1, id);
-            ResultSet vysledky = dotaz.executeQuery();
-            vysledky.next();
-            pojistenecDTO = new PojistenecDTO(vysledky.getInt(1), vysledky.getString(2), vysledky.getString(3), vysledky.getString(4),
-                                              vysledky.getString(5), vysledky.getString(6), vysledky.getString(7), vysledky.getString(8));
-        }
-        catch (SQLException ex) {
-            System.out.println("Chyba při komunikaci s databází");
-        }
-        return pojistenecDTO;
-    }    
+    //Dodělat tělo smazání - tohle je založeno pouze pro zavolání funkce jinde
+    public void smazatPojistence(PojistenecDTO pojistenecDTO){
+        System.out.println(pojistenecDTO.getJmeno());
+    } 
 }

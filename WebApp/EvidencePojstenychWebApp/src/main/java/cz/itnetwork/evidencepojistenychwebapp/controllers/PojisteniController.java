@@ -9,26 +9,28 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/pojistovna/pojisteni")
 public class PojisteniController {
     
 @Autowired
 private PojisteniService pojisteniService;  
 
-    @GetMapping("/pojisteni")
+    @GetMapping()
     public String vypsaniStrankyPojisteni(/*@ModelAttribute PojisteniDTO pojisteniDTO,*/ Model model) {
         List<PojisteniDTO> pojisteni = pojisteniService.ziskaniVsechPojisteni();
         model.addAttribute("seznamPojisteni", pojisteni);
         return "pojisteni";
     }
     
-    @GetMapping("/pojisteni/novy")
+    @GetMapping("novy")
     public String vypsaniFormularNovyPojistenec(@ModelAttribute PojisteniDTO pojisteniDTO) {
         return "pojisteniPridatPojisteni";
     }
     
-    @PostMapping("/pojisteni/novy")
+    @PostMapping("novy")
     public String zalozitNovehoPojistence(@ModelAttribute PojisteniDTO pojisteniDTO) {
         pojisteniService.zalozitNovePojisteni(pojisteniDTO);
         return "pojisteniResult";

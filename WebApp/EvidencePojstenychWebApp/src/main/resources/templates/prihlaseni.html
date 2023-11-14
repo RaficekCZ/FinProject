@@ -12,25 +12,25 @@
 <body class="bg-white">
     <header class="container-xs">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">PojApp</a>
+            <a class="navbar-brand" href="/pojistovna">PojApp</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#obsah-navigacni-listy">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="obsah-navigacni-listy">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="\pojistenci">Pojištěnci</a>
+                        <a class="nav-link" href="/pojistovna/pojistenci">Pojištěnci</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="\pojisteni">Pojištění</a>
+                        <a class="nav-link" href="/pojistovna/pojisteni">Pojištění</a>
                     </li>                
                     <li class="nav-item">
-                        <a class="nav-link" href="\about">O aplikaci</a>
+                        <a class="nav-link" href="/pojistovna/about">O aplikaci</a>
                     </li>                     
                 </ul>
                 <ul class="navbar-nav ml-auto">
                      <li class="nav-item ">
-                        <a class="nav-link active" href="#">Přihlásit</a>
+                        <a class="nav-link active" href="/pojistovna/prihlaseni">Přihlásit</a>
                     </li>
                      <li class="nav-item ">
                         <a class="nav-link disabled" href="#">Registrovat</a>
@@ -47,7 +47,7 @@
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
-                <form action="/prihlaseni" method="post">
+                <form action="/pojistovna/prihlaseni" method="post">
                     <div class="form-group">
                         <label for="jmeno">Přihlašovací jméno</label>
                         <input type="text" class="form-control" id="jmeno" name="jmeno" placeholder="Vaše přihlašovací jméno" th:field="${prihlaseniDTO.jmeno}">

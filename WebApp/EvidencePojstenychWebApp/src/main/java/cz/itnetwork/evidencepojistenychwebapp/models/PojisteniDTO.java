@@ -5,6 +5,10 @@ public class PojisteniDTO {
     private String nazev;
     private String min;
     private String max;
+    
+    private String vyse;
+    private String odDne;
+    private String doDne;
 
     public PojisteniDTO(String nazev, String min, String max) {
         this.nazev = nazev;
@@ -36,4 +40,27 @@ public class PojisteniDTO {
         this.max = max;
     }
 
+    public String getVyse() {
+        return vyse;
+    }
+
+    public void setVyse(String vyse) {
+        this.vyse = vyse;
+    }
+
+    public String getOdDne() {
+        return odDne;
+    }
+
+    public void setOdDne(String odDne) {
+        this.odDne = odDne;
+    }
+
+    public String getDoDne() {
+        return doDne;
+    }
+
+    public void setDoDne(String doDne) {
+        this.doDne = doDne;
+    }
 }

@@ -12,25 +12,25 @@
 <body class="bg-white">
     <header class="container-xs">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">PojApp</a>
+            <a class="navbar-brand" href="/pojistovna">PojApp</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#obsah-navigacni-listy">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="obsah-navigacni-listy">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Pojištěnci</a>
+                        <a class="nav-link" href="/pojistovna/pojistenci">Pojištěnci</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="\pojisteni">Pojištění</a>
+                        <a class="nav-link" href="/pojistovna/pojisteni">Pojištění</a>
                     </li>                
                     <li class="nav-item">
-                        <a class="nav-link" href="\about">O aplikaci</a>
+                        <a class="nav-link" href="/pojistovna/about">O aplikaci</a>
                     </li>                     
                 </ul>
                 <ul class="navbar-nav ml-auto">
                      <li class="nav-item ">
-                        <a class="nav-link" href="\prihlaseni">Přihlásit</a>
+                        <a class="nav-link" href="/pojistovna/prihlaseni">Přihlásit</a>
                     </li>
                      <li class="nav-item ">
                         <a class="nav-link disabled" href="#">Registrovat</a>
@@ -42,35 +42,69 @@
     <main class="container-fluid">
         <div class="row mt-md-5">
             <div class="col-md-1"></div>
-            <div class="col-md-2 text-center align-center bg-success"><h2 class="text-dark">Avatar</h2></div>
+            <div class="col-md-2 d-flex align-items-center justify-content-end"><img th:src="@{/images/avatar.jpg}" class="img-fluid" alt="Obrázek avatara"></div>
             <div class="col-md-8">
                 <div class="row">
-                    <div class="col-md-12 bg-primary"><h3 class="text-dark" th:text="${pojistenecDTO.jmeno}">Jméno s Příjmením</h3></div>
+                    <div class="col-md-12"><h3 class="text-dark" th:text="${pojistenecDTO.celeJmeno}"></h3></div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="row">
-                            <div class="col-md-6 bg-danger">Ulice s číslem</div>
-                            <div class="col-md-6 bg-warning">Email</div>
+                            <div class="col-md-6" th:text="${pojistenecDTO.uliceCislo}"></div>
+                            <div class="col-md-6" th:text="${pojistenecDTO.email}"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 bg-primary">Město</div>
-                            <div class="col-md-6 bg-danger">Telefon</div>
+                            <div class="col-md-6" th:text="${pojistenecDTO.mesto}"></div>
+                            <div class="col-md-6" th:text="${pojistenecDTO.telefon}"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 bg-warning">PSČ</div>
+                            <div class="col-md-6" th:text="${pojistenecDTO.psc}"></div>
                         </div>                                
                     </div>
                 </div>
             </div>
         </div>
-        <!--
-        <div class="row">
-            <div class="col-md-5"></div>
-            <div class="col-md-2 text-center"><a class="btn btn-success" href="\pojistenci\novy">Přidat pojištěnce</a></div>
-            <div class="col-md-5"></div>
+        <div class="row mt-md-3">
+            <div class="col-md-1"></div>
+            <div class="col-md-10"><h3 class="text-dark">Sjednaná pojištění</h2></div>
         </div>
-        -->
+        <div class="row mt-md-3">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">                
+                <table class="table table-light table-hover table-bordered">
+                    <thead class="thead-dark">
+                        <th>Pojištění</th>
+                        <th>Částka</th>
+                        <th>Možnosti</th>
+                    </thead>
+                    <!--
+                    <tbody>
+                        <tr th:each="pojistenec : ${seznamPojistencu}">
+                            <td class="align-middle"><a th:href="@{/pojistovna/pojistenci/detail/{id}(id=${pojistenec.pojistenecId})}" th:text="${pojistenec.celeJmeno}"></a></td>
+                            <td class="align-middle" th:text="${pojistenec.adresa}"></td>
+                            <td class="align-middle">
+                                <button type="button" class="btn btn-warning">Editovat</button>
+                                <button type="button" class="btn btn-danger">Odstranit</button>
+                            </td>                        
+                        </tr>
+                    </tbody>
+                    -->
+                </table>                
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 text-center">
+                <button type="button" class="btn btn-success">Přidat pojištění</button>
+                <a class="btn btn-warning" th:href="@{/pojistovna/pojistenci/editace/{id}(id=${pojistenecDTO.pojistenecId})}">Editovat pojištěnce</a>
+                <!--
+                <button type="button" class="btn btn-danger">Odstranit pojištěnce</button>                
+                -->
+                <form action="/pojistovna/pojistenci/smazani" method="post">
+                    <input type="submit" value="Odstranit pojištěnce" class="btn btn-danger"/>
+                </form>
+            </div>
+        </div>        
     </main>
 </body>
 </html>
